@@ -1,0 +1,6 @@
+<h1>Articles</h1>
+<ul>
+    {% for a in lesArticles %}
+        <li><img width=30 src="{{ a.image|e }}"> {{ a.libelle|e }}</li>
+    {% endfor %}
+</ul>
