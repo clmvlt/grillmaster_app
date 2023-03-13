@@ -37,6 +37,7 @@ class Commande
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesCommandes')]
     private Collection $lesArticles;
 
+
     public function __construct()
     {
         $this->lesArticles = new ArrayCollection();
@@ -142,4 +143,5 @@ class Commande
 
         return $this;
     }
+
 }

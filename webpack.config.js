@@ -69,6 +69,7 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
+    .enableVueLoader()
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 ;
