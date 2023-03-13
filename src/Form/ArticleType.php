@@ -19,8 +19,7 @@ class ArticleType extends AbstractType
             ->add('fidelite')
             ->add('description')
             ->add('reference')
-            ->add('leMenu')
-            ->add('lesCommandes')
+            
         ;
     }
 
