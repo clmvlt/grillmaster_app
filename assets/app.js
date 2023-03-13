@@ -15,3 +15,6 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 import './bootstrap';
 
 import { createApp } from 'vue';
+
+import ListeArticle from './js/article/liste.vue';
+createApp(ListeArticle).mount('#liste-article');
