@@ -36,14 +36,16 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
-    #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'lesArticles')]
-
     #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'lesArticles')]
     private Collection $lesCommandes;
+
+    #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'lesArticles')]
+    private Collection $lesMenus;
 
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
+        $this->lesMenus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,4 +163,32 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Menu>
+     */
+    public function getLesMenus(): Collection
+    {
+        return $this->lesMenus;
+    }
+
+    public function addLesMenu(Menu $lesMenu): self
+    {
+        if (!$this->lesMenus->contains($lesMenu)) {
+            $this->lesMenus->add($lesMenu);
+            $lesMenu->addLesArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesMenu(Menu $lesMenu): self
+    {
+        if ($this->lesMenus->removeElement($lesMenu)) {
+            $lesMenu->removeLesArticle($this);
+        }
+
+        return $this;
+    }
+
 }

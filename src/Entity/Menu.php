@@ -18,7 +18,7 @@ class Menu
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'menu')]
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesMenus')]
     private Collection $lesArticles;
 
     public function __construct()
@@ -66,4 +66,5 @@ class Menu
 
         return $this;
     }
+
 }
