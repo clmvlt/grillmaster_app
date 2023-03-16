@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\FamilleArticle;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +21,11 @@ class ArticleType extends AbstractType
             ->add('fidelite')
             ->add('description')
             ->add('reference')
-            
+            ->add('famille', EntityType::class, array(
+                'class' => FamilleArticle::class,
+                'choice_label' => 'libelle',
+                'multiple' => false,
+            ))
         ;
     }
 
