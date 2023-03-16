@@ -48,8 +48,7 @@ class ArticleController extends AbstractController
         {
             $manager->persist($article);
             $manager->flush();
-            return $this->redirectToRoute('retour');
-        }
+            return $this->redirect($request->getUri());        }
  
         return $this->render('article/create.html.twig', [
             'form' => $form->createView(),
