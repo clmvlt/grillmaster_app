@@ -11,13 +11,11 @@
         </tr>
         </thead>
         <tbody>
-            <div v-for="article in lesarticles" :key="article.id">
-                <tr>
+                <tr v-for="article in lesarticles" :key="article.id">
                     <td>{{article.id}}</td>
                     <td>{{article.libelle}}</td>
-                    <td><img v-bind:src="article.image" /></td>
+                    <td><img v-bind:src="article.image"></td>
                 </tr>
-            </div>
         </tbody>
     </table>
     </div>

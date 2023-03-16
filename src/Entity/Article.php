@@ -42,6 +42,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'lesArticles')]
     private Collection $lesMenus;
 
+    #[ORM\ManyToOne(inversedBy: 'lesArticles')]
+    private ?FamilleArticle $famille = null;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
@@ -187,6 +190,18 @@ class Article
         if ($this->lesMenus->removeElement($lesMenu)) {
             $lesMenu->removeLesArticle($this);
         }
+
+        return $this;
+    }
+
+    public function getFamille(): ?FamilleArticle
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?FamilleArticle $famille): self
+    {
+        $this->famille = $famille;
 
         return $this;
     }
