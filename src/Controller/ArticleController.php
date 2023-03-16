@@ -7,6 +7,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,14 +39,22 @@ class ArticleController extends AbstractController
         
         if(!$article)
         {$article = new Article();}
-        
- 
+
         $form = $this->createForm(ArticleType::class,$article);
- 
+        
         $form->handleRequest($request);
  
         if(($form->isSubmitted() && $form->isValid()))
         {
+            $file_tmp = $_FILES['article']['tmp_name']['image'];
+
+            $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+            $img = $form['image']->getData();
+            $data = file_get_contents($img);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $article->setImage($base64);
+
             $manager->persist($article);
             $manager->flush();
             return $this->redirect($request->getUri());        }
@@ -54,5 +63,17 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
             'editmode' => $article->getId() !== null
         ]);
+    }
+
+    #[Route('/article/delete/{id}', name: 'app_article_delete')]
+    public function Delete(Article $article = null,
+    Request $request, 
+    EntityManagerInterface $manager)
+    {
+        if($article) {
+            $manager->remove($article);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('app_article_liste');
     }
 }

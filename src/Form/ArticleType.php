@@ -6,8 +6,10 @@ use App\Entity\Article;
 use App\Entity\FamilleArticle;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArticleType extends AbstractType
 {
@@ -15,7 +17,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('image')
+            ->add('image', FileType::class)
             ->add('prix_euro')
             ->add('prix_fidelite')
             ->add('fidelite')
