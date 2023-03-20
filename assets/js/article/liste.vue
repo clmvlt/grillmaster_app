@@ -1,6 +1,7 @@
 <template>
     <div>
     <h1>Articles</h1>
+    <a class="btn btn-primary" href="/article/create">Créer</a>
 
     <table>
         <thead>

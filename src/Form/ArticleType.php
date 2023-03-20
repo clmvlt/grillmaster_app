@@ -17,7 +17,6 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('image', FileType::class)
             ->add('prix_euro')
             ->add('prix_fidelite')
             ->add('fidelite')
@@ -29,6 +28,11 @@ class ArticleType extends AbstractType
                 'multiple' => false,
             ))
         ;
+        if (!$builder->getData()->getImage()) {
+            $builder->add('image', FileType::class);
+        } else {
+
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
