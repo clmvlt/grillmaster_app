@@ -1,6 +1,7 @@
 <template>
     <div>
     <h1>Articles</h1>
+    <a class="btn btn-primary" href="/article/create">Créer</a>
 
     <table>
         <thead>
@@ -8,16 +9,16 @@
             <th>ID</th>
             <th>Nom</th>
             <th>Image</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-            <div v-for="article in lesarticles" :key="article.id">
-                <tr>
+                <tr v-for="article in lesarticles" :key="article.id">
                     <td>{{article.id}}</td>
                     <td>{{article.libelle}}</td>
-                    <td><img v-bind:src="article.image" /></td>
+                    <td><img style="width: 60px" v-bind:src="article.image"></td>
+                    <td><a class="btn btn-warning" v-bind:href="'/article/edit/'+article.id">Modifier</a><a class="btn btn-danger" v-bind:href="'/article/delete/'+article.id">Supprimer</a></td>
                 </tr>
-            </div>
         </tbody>
     </table>
     </div>

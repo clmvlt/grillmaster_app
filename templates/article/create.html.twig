@@ -1,5 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
 {{ form_start(form) }}
+
+    {{ form_row(form.libelle, {
+        "required": true,
+        "attr": {
+            "style":"width: 200px"
+        },
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+
+    {{ form_row(form.prix_euro, {
+        "required": true,
+        "type": "number",
+        "attr": {
+            "style":"width: 200px",
+            "step": 0.01
+        },
+        "label": "Prix de l'article en €",
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+
+    {{ form_row(form.prix_fidelite, {
+        "required": true,
+        "type": "number",
+        "attr": {
+            "style":"width: 200px"
+        },
+        "label": "Prix de l'article en en points de fidelité",
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+
+    {{ form_row(form.fidelite, {
+        "required": true,
+        "label": "Fait parti du programme de fidelité",
+    }) }}
+
+    {{ form_row(form.description, {
+        "required": true,
+        "type": "text",
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+    
+    {{ form_row(form.image, {
+        "required": true,
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+
     {{ form_widget(form) }}
 
-    <input type="submit"/>
+    <input class="btn btn-success" type="submit" value="Créer" />
+    <aclass="btn btn-danger" href="/article/liste">Quitter</a>
 {{ form_end(form) }}
+
+{% endblock %}
