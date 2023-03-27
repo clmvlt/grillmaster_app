@@ -18,3 +18,9 @@ import { createApp } from 'vue';
 
 import ListeArticle from './js/article/liste.vue';
 createApp(ListeArticle).mount('#liste-article');
+
+import ListeProduit from './js/produits/liste.vue';
+createApp(ListeProduit).mount('#liste-produit');
+
+import Navbar from './js/navbar.vue';
+createApp(Navbar).mount('#vue-navbar');
