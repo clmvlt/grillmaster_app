@@ -45,7 +45,7 @@
           Mon panier
           <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
         </button>
-        <button class="btn btn-outline-warning" style="margin-left: 10px">Me connecter</button>
+        <a href="/login" class="btn btn-outline-warning" style="margin-left: 10px">Me connecter</a>
       </div>
     </div>
   </nav>
