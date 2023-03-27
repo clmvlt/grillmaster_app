@@ -37,6 +37,9 @@ class Commande
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesCommandes')]
     private Collection $lesArticles;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?User $User = null;
+
 
     public function __construct()
     {
@@ -140,6 +143,18 @@ class Commande
     public function removeLesArticle(Article $lesArticle): self
     {
         $this->lesArticles->removeElement($lesArticle);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

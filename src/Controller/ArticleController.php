@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
@@ -75,5 +76,14 @@ class ArticleController extends AbstractController
             $manager->flush();
         }
         return $this->redirectToRoute('app_article_liste');
+    }
+    #[Route('/article/modify/{id}', name: 'app_article_modify')]
+    public function Modify(Article $article = null,
+    Request $request,
+    EntityManagerInterface $manager)
+    {
+        if($article) {
+            
+        }
     }
 }
