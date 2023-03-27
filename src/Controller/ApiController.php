@@ -27,6 +27,8 @@ class ApiController extends AbstractController
                 'id' => $article->getId(),
                 'libelle' => $article->getLibelle(),
                 'image' => $article->getImage(),
+                'prix_euro' => $article->getPrixEuro(),
+                'prix_fidelite' => $article->getPrixFidelite(),
             ];
         }
         return new JsonResponse($data);
