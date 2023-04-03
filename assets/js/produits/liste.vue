@@ -17,18 +17,38 @@
       >
         <div class="col mb-5" v-for="article in lesarticles" :key="article.id">
           <div class="card h-100">
-            <img class="card-img-top" style="max-height: 50%" v-bind:src="article.image">
+            <img
+              class="card-img-top"
+              style="max-height: 50%"
+              v-bind:src="article.image"
+            />
             <div class="card-body p-4">
               <div class="text-center">
-                <h5 class="fw-bolder">{{article.libelle}}</h5>
-                {{article.prix_euro}}€ / {{article.prix_fidelite}} Points
+                <h5 class="fw-bolder">{{ article.libelle }}</h5>
+                {{ article.prix_euro }}€ / {{ article.prix_fidelite }} Points
               </div>
             </div>
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
               <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#"
-                  >Ajouter au panier</a
+                <div v-if="user.id==null">
+                <a
+                  type="button"
+                  class="btn btn-outline-dark mt-auto"
+                  href="/login"
+                >Ajouter au panier</a>
+                </div>
+                <div v-else>
+                  <button
+                  type="button"
+                  @click="addPanier(article.id)"
+                  class="btn btn-outline-dark mt-auto"
                 >
+                  Ajouter au panier<span
+                    class="badge bg-dark text-white ms-1 rounded-pill"
+                    >{{ countInPanier(article.id) }}</span
+                  >
+                </button>
+                </div>
               </div>
             </div>
           </div>
@@ -44,15 +64,35 @@ export default {
   data() {
     return {
       lesarticles: [],
+      panier: [],
+      user: {id: null}
     };
   },
-  methods: {},
+  methods: {
+    addPanier(id) {
+      fetch("/api/addPanier/" + id);
+      this.panier.push(this.lesarticles.find((x) => x.id == id));
+    },
+    countInPanier(id) {
+      return this.panier.filter((x) => x.id == id).length;
+    },
+  },
 
   mounted() {
     fetch("/api/getArticles")
       .then((response) => response.json())
       .then((data) => {
         this.lesarticles = data;
+      });
+    fetch("/api/getPanier")
+      .then((response) => response.json())
+      .then((data) => {
+        this.panier = data;
+      });
+    fetch("/api/getUser")
+      .then((response) => response.json())
+      .then((data) => {
+        this.user = data;
       });
   },
 };

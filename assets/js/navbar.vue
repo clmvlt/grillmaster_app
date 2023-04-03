@@ -19,7 +19,7 @@
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Nos Produits</a>
+            <a class="nav-link" href="/boutique">Nos Produits</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Mes Avantages</a>
@@ -40,12 +40,17 @@
             </ul>
           </li>
         </ul>
-        <button class="btn btn-outline-dark">
+        <div v-if="user.id==null">
+          <a href="/login" class="btn btn-outline-warning" style="margin-left: 10px">Me connecter</a>
+        </div>
+        <div v-else>
+          <a href="/panier" class="btn btn-outline-dark">
           <i class="bi-cart-fill me-1"></i>
           Mon panier
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-        </button>
-        <a href="/login" class="btn btn-outline-warning" style="margin-left: 10px">Me connecter</a>
+        </a>
+          <a href="/logout" class="btn btn-outline-danger" style="margin-left: 10px">Me déconnecter</a>
+          * Connecté en tant que {{user.username}}
+        </div>
       </div>
     </div>
   </nav>
@@ -57,15 +62,22 @@ export default {
   data() {
     return {
       lesarticles: [],
+      user: {id: null}
     };
   },
-  methods: {},
+  methods: {
+  },
 
   mounted() {
     fetch("/api/getArticles")
       .then((response) => response.json())
       .then((data) => {
         this.lesarticles = data;
+      });
+      fetch("/api/getUser")
+      .then((response) => response.json())
+      .then((data) => {
+        this.user = data;
       });
   },
 };

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,6 +37,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Commande::class)]
     private Collection $commandes;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    private ?string $amount_euro = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
+    private ?string $amount_fidelite = null;
 
     public function __construct()
     {
@@ -169,6 +176,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $commande->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAmountEuro(): ?string
+    {
+        return $this->amount_euro;
+    }
+
+    public function setAmountEuro(string $amount_euro): self
+    {
+        $this->amount_euro = $amount_euro;
+
+        return $this;
+    }
+
+    public function getAmountFidelite(): ?string
+    {
+        return $this->amount_fidelite;
+    }
+
+    public function setAmountFidelite(string $amount_fidelite): self
+    {
+        $this->amount_fidelite = $amount_fidelite;
 
         return $this;
     }

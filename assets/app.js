@@ -24,3 +24,6 @@ createApp(ListeProduit).mount('#liste-produit');
 
 import Navbar from './js/navbar.vue';
 createApp(Navbar).mount('#vue-navbar');
+
+import Panier from './js/boutique/panier.vue';
+createApp(Panier).mount('#vue-panier');
