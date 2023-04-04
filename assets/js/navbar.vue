@@ -19,35 +19,25 @@
             <a class="nav-link" href="/boutique">Nos Produits</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Mes Avantages</a>
+            <a class="nav-link" href="/avantages">Mes Avantages</a>
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Nos Menus
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item">Menu 1</a></li>
-              <li><a class="dropdown-item">Menu 2</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/menus">Nos Menus</a>
           </li>
         </ul>
-        <div v-if="user.id==null">
-          <a href="/login" class="btn btn-outline-warning" style="margin-left: 10px">Me connecter</a>
-        </div>
-        <div v-else>
-          <a href="/panier" class="btn btn-outline-dark">
-          <i class="bi-cart-fill me-1"></i>
-          Mon panier
-        </a>
-          <a href="/logout" class="btn btn-outline-danger" style="margin-left: 10px">Me déconnecter</a>
-          * Connecté en tant que {{user.username}} | {{user.amount_euro}}€ et {{user.amount_fidelite}} points
-        </div>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <div v-if="user.id==null">
+            <li>
+              <a href="/login" class="btn btn-outline-light" style="margin-left: 10px">Me connecter</a>
+            </li>
+          </div>
+          <div v-else>
+            <li>
+              <a href="/user" class="btn btn-outline-primary">Mon compte</a>
+              <a href="/panier" class="btn btn-outline-light" style="margin-left: 5px"><img width="22" src="/build/images/panier.png"></a>
+            </li>
+          </div>
+        </ul>
       </div>
     </div>
   </nav>

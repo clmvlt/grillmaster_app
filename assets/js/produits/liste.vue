@@ -1,14 +1,12 @@
 <template>
-  <header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-      <div class="text-center text-white">
-        <h1 class="display-4 fw-bolder">Nos Produits</h1>
-        <p class="lead fw-normal text-white-50 mb-0">
-          Voici la liste complète des produits en vente.
-        </p>
-      </div>
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-dark">
+      <h1 class="display-4 fw-bolder">Nos Produits</h1>
+      <p class="lead fw-normal text-dark-50 mb-0">
+        Voici la liste complète des produits en vente.
+      </p>
     </div>
-  </header>
+  </div>
 
   <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -28,7 +26,7 @@
                 {{ article.prix_euro }}€ / {{ article.prix_fidelite }} Points
               </div>
             </div>
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="card-footer p-4 pt-0 border-top-0">
               <div class="text-center">
                 <div v-if="user.id==null">
                 <a
