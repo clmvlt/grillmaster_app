@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+    {{ form_row(form.libelle, {
+        "required": true,
+        "attr": {
+            "style":"width: 200px"
+        },
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+
+   
+
+         {{ form_row(form.lesArticles, {
+           "required": true,
+           "attr": {
+               "style":"width: 200px"
+        },
+        "params": {
+            "raw_label": true
+        }
+    }) }}
+   
+       
+     {{ form_widget(form) }}
+
+    <input class="btn btn-success" type="submit" value="Créer" />
+    <aclass="btn btn-danger" href="/menu/create">Quitter</a>
+{{ form_end(form) }}
+
+  
+
+   
+{{ form_end(form) }}
+
+{% endblock %}
