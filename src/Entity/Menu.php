@@ -21,6 +21,9 @@ class Menu
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesMenus')]
     private Collection $lesArticles;
 
+    #[ORM\Column(length: 8000000)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->lesArticles = new ArrayCollection();
@@ -63,6 +66,18 @@ class Menu
     public function removeLesArticle(Article $lesArticle): self
     {
         $this->lesArticles->removeElement($lesArticle);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
