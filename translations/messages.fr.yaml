@@ -1,0 +1,2 @@
+'Your password should be at least {{ limit }} characters.' : 'Votre mot de passe doit contenir au moins {{ limit }} caractères.'
+"Please enter a password" : "Merci d'entrer un mot de passe."

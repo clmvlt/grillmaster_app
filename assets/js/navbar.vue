@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-custom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">GrillMaster</a>
+      <span class="navbar-brand text-logo">Grill Master</span>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,9 +15,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/boutique">Nos Produits</a>
           </li>
