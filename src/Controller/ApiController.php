@@ -109,4 +109,19 @@ class ApiController extends AbstractController
 
         return new JsonResponse($data);
     }
+    #[Route('api/getMenu', name: 'app_api_getmenu')]
+    public function getMenu(ArticleRepository $rep): JsonResponse
+    {
+        $lesmenu = $rep->findAll();
+        $data = [];
+        foreach ($lesmenu as $menu) {
+            $data[] = [
+                'id' => $menu->getId(),
+                'libelle' => $menu->getLibelle(),
+                'image' => $menu->getImage(),
+           
+            ];
+        }
+        return new JsonResponse($data);
+    }
 }
