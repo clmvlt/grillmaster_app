@@ -49,7 +49,7 @@
           Mon panier
         </a>
           <a href="/logout" class="btn btn-outline-danger" style="margin-left: 10px">Me déconnecter</a>
-          * Connecté en tant que {{user.username}}
+          * Connecté en tant que {{user.username}} | {{user.amount_euro}}€ et {{user.amount_fidelite}} points
         </div>
       </div>
     </div>

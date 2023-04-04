@@ -102,6 +102,8 @@ class ApiController extends AbstractController
                 'id' => $user->getId(),
                 'username' => $user->getUserIdentifier(),
                 'roles' => $user->getRoles(),
+                'amount_euro' => $user->getAmountEuro(),
+                'amount_fidelite' => $user->getAmountFidelite(),
             ];
         }
 

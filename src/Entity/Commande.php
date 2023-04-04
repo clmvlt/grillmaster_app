@@ -31,10 +31,7 @@ class Commande
     #[ORM\ManyToOne(inversedBy: 'lesCommandes')]
     private ?TypeCommande $id_typecommande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'lesCommandes')]
-    private ?User $id_utilisateur = null;
-
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesCommandes')]
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesCommandes', cascade: ['persist'])]
     private Collection $lesArticles;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
@@ -107,18 +104,6 @@ class Commande
     public function setIdTypecommande(?TypeCommande $id_typecommande): self
     {
         $this->id_typecommande = $id_typecommande;
-
-        return $this;
-    }
-
-    public function getIdUtilisateur(): ?User
-    {
-        return $this->id_utilisateur;
-    }
-
-    public function setIdUtilisateur(?User $id_utilisateur): self
-    {
-        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }

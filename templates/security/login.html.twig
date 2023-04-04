@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Identification{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -9,14 +9,15 @@
       <h2 class="form-signin-heading">GrillMaster</h2>
       {% if app.user %}
         <p>
-            * Connecté en tant que {{ app.user.userIdentifier }}.
+            * Connecté en tant que {{ app.user.userIdentifier }}. <a href="/logout" style="border:0px;color: red;box-shadow: 0px">Déconnexion</a>
         </p>
     {% endif %}
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-      <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" value="{{ last_username }}" id="inputUsername"/>
-      <input type="password" class="form-control" name="password" placeholder="Password" required="" id="inputPassword" autocomplete="current-password"/>      
+      <input type="text" class="form-control" name="username" placeholder="Utilisateur" required="" autofocus="" value="{{ last_username }}" id="inputUsername"/>
+      <br/>
+      <input type="password" class="form-control" name="password" placeholder="Mot de passe" required="" id="inputPassword" autocomplete="current-password"/>      
       <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" name="_remember_me"> Se souvenir de moi

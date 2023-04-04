@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Commande;
+use App\Entity\TypeCommande;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +28,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
     #[Route('/paiement/{fidelite}', name: 'app_paiement')]
-    public function Paiement(Bool $fidelite, Request $req)
+    public function Paiement(Bool $fidelite, Request $req, EntityManagerInterface $manager): Response
     {
         $session = $req->getSession();
         $panier = $session->get('panier');
@@ -57,12 +60,40 @@ class BoutiqueController extends AbstractController
         }
 
         if ($cmdOk) {
+            $commande = new Commande();
+
             if ($fidelite) {
                 $user->setAmountFidelite($user->getAmountFidelite() - $totalFid);
+                $commande->setMontantEuro(0);
+                $commande->setMontantFidelite($totalFid);
             } else {
-
+                $user->setAmountEuro($user->getAmountEuro() - $totalEur);
+                $commande->setMontantEuro($totalEur);
+                $commande->setMontantFidelite(0);
             }
+            $commande->setUser($user);
+            $commande->setDateCommande(new \DateTime());
+            
+            
+            $gainFid = $commande->getMontantEuro() / 5;
+            $commande->setGainFidelite($gainFid);
+            $commande->setIdTypecommande($manager->getRepository(TypeCommande::class)->find(1));
+            $user->setAmountFidelite($user->getAmountFidelite() + $gainFid);
+
+            
+            foreach ($panier as $item) {
+                $commande->addLesArticle($item);
+            }
+            $session->set('panier', array());
+            
+            $manager->persist($commande);
         }
+
+        return $this->render('boutique/paiement.html.twig', [
+            'controller_name' => 'BoutiqueController',
+            'message' => $msg,
+            'cmdOk' => $cmdOk
+        ]);
     }
 
     #[Route('/accueil', name: 'app_accueil')]
