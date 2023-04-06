@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="vue-navbar"></div>
+<div class="row">
+    <div class="col-12 mt-5">
+        <div class="text-center">
+            <img width="100" src="{{app.user.image}}">
+            <p>{{app.user.username}}</p>
+            <p>{{app.user.email}}</p>
+            <p>{{app.user.amountEuro}}€</p>
+            <p>{{app.user.amountFidelite}} points</p>
+
+            <h3>Mes Commandes ({{app.user.lesCommandes|length}})</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Numéro</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Nombre d'articles</th>
+                    </tr>
+                </thead>
+                <tbody
+                    {% for cmd in app.user.lesCommandes %}
+                    <tr>
+                        <td>{{cmd.montantEuro == 0 ? "FID" : "CB"}}00{{cmd.id}}</td>
+                        <td>{{cmd.idTypeCommande.libelle}}</td>
+                        <td>-{{cmd.montantEuro == 0 ? cmd.montantFidelite ~ " points" : cmd.montantEuro ~ "€"}}</td>
+                        <td>Le {{cmd.dateCommande|date('Y-m-d')}} à {{cmd.dateCommande|date('H:i:s')}}</td>
+                        <td>{{cmd.lesArticles|length}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

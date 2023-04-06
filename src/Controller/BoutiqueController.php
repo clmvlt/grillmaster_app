@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Commande;
+use App\Entity\FamilleArticle;
 use App\Entity\TypeCommande;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -49,14 +50,19 @@ class BoutiqueController extends AbstractController
 
         if ($fidelite) {
             if ($user->getAmountFidelite() < $totalFid) {
-                $msg = "Pas assez de points de fidelite.";
+                $msg = "Vous n'avez pas assez de points de fidelite.";
                 $cmdOk = false;
             }
         } else {
             if ($user->getAmountEuro() < $totalEur) {
-                $msg = "Pas assez d'argent";
+                $msg = "Vous n'avez pas assez d'euro sur votre compte.";
                 $cmdOk = false;
             }
+        }
+
+        if (count($panier)==0) {
+            $cmdOk = false;
+            $msg = "Vous n'avez aucun article dans votre panier.";
         }
 
         if ($cmdOk) {
@@ -82,13 +88,15 @@ class BoutiqueController extends AbstractController
 
             
             foreach ($panier as $item) {
+                $item->setFamille($manager->getRepository(FamilleArticle::class)->find($item->getFamille()));
                 $commande->addLesArticle($item);
             }
-            $session->set('panier', array());
             
             $manager->persist($commande);
-        }
+            $manager->flush();
 
+            $session->set('panier', array());
+        }
         return $this->render('boutique/paiement.html.twig', [
             'controller_name' => 'BoutiqueController',
             'message' => $msg,
@@ -98,6 +106,22 @@ class BoutiqueController extends AbstractController
 
     #[Route('/accueil', name: 'app_accueil')]
     public function Accueil(): Response
+    {
+        return $this->render('boutique/accueil.html.twig', [
+            'controller_name' => 'BoutiqueController',
+        ]);
+    }
+
+    #[Route('/compte', name: 'app_compte')]
+    public function Compte(): Response
+    {
+        return $this->render('boutique/compte.html.twig', [
+            'controller_name' => 'BoutiqueController',
+        ]);
+    }
+
+    #[Route('/avantages', name: 'app_avantages')]
+    public function Avntages(): Response
     {
         return $this->render('boutique/accueil.html.twig', [
             'controller_name' => 'BoutiqueController',

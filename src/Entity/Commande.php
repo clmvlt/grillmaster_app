@@ -34,8 +34,10 @@ class Commande
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'lesCommandes', cascade: ['persist'])]
     private Collection $lesArticles;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?User $User = null;
+    #[ORM\ManyToOne(inversedBy: 'lesCommandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
 
 
     public function __construct()
@@ -134,14 +136,13 @@ class Commande
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?User $user): self
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }
-
 }

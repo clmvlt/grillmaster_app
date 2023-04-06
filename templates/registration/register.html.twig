@@ -20,6 +20,21 @@
             * Connecté en tant que {{ app.user.userIdentifier }}. <a href="/logout" style="border:0px;color: red;box-shadow: 0px">Déconnexion</a>
         </p>
       {% endif %}
+
+        {{ form_row(registrationForm.email, {
+            label: false,
+            "attr": {
+                "placeholder": "Adresse mel"
+            }
+        }) }}
+
+        {{ form_row(registrationForm.image, {
+            "label": "Photo de profil",
+            "required": true,
+            "params": {
+                "raw_label": true
+            }
+        }) }}
       
         {{ form_row(registrationForm.username, {
             label: false,
@@ -27,6 +42,7 @@
                 "placeholder": "Utilisateur"
             }
         }) }}
+
         {{ form_row(registrationForm.plainPassword, {
             label: false,
             "attr": {

@@ -3,6 +3,10 @@
 {% block body %}
 
   <div id="vue-navbar"></div>
-  <div>{{cmdOk ? "Merci pour votre commande !" : "Votre commande n'a pas pu être passée."}}</div>
+  <div class="text-center mt-5">
+  {{cmdOk ? "Merci pour votre commande !" : "Votre commande n'a pas pu être passée."}}
+  <br/>
+  {{cmdOk == false and message != "" ? "Raison : " ~ message}}
+  </div>
 
 {% endblock %}

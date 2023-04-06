@@ -34,6 +34,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $file_tmp = $_FILES['registration_form']['tmp_name']['image'];
+
+            $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+            $img = $form['image']->getData();
+            $data = file_get_contents($img);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $user->setImage($base64);
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

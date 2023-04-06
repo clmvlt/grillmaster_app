@@ -16,13 +16,13 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/boutique">Nos Produits</a>
+            <a class="nav-link" href="/boutique"><span :class="getActive('boutique')">Nos Produits</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/avantages">Mes Avantages</a>
+            <a class="nav-link" href="/avantages"><span :class="getActive('avantages')">Mes Avantages</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/menus">Nos Menus</a>
+            <a class="nav-link" href="/menu"><span :class="getActive('menu')">Nos Menus</span></a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -33,8 +33,8 @@
           </div>
           <div v-else>
             <li>
-              <a href="/user" class="btn btn-outline-primary">Mon compte</a>
-              <a href="/panier" class="btn btn-outline-light" style="margin-left: 5px"><img width="22" src="/build/images/panier.png"></a>
+              <a href="/compte" class="btn btn-outline-primary">Mon compte</a>
+              <a href="/panier" class="btn btn-outline-light" style="margin-left: 5px"><img width="22" v-bind:src="getUrl('images/panier.png')"></a>
             </li>
           </div>
         </ul>
@@ -53,6 +53,16 @@ export default {
     };
   },
   methods: {
+    getActive(routeName) {
+      if(window.location.href.indexOf("/"+routeName) > -1)
+      {
+          return "selected";
+      }
+      return '';
+    },
+    getUrl(path) {
+      return window.location.origin + "/" + path;
+    }
   },
 
   mounted() {

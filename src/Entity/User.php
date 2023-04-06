@@ -32,22 +32,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_utilisateur', targetEntity: Commande::class)]
-    private Collection $lesCommandes;
 
-    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Commande::class)]
-    private Collection $commandes;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[ORM\Column(type: Types::FLOAT)]
     private ?string $amount_euro = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?string $amount_fidelite = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 8000000)]
+    private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class)]
+    private Collection $lesCommandes;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
-        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,66 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getLesCommandes(): Collection
-    {
-        return $this->lesCommandes;
-    }
-
-    public function addLesCommande(Commande $lesCommande): self
-    {
-        if (!$this->lesCommandes->contains($lesCommande)) {
-            $this->lesCommandes->add($lesCommande);
-            $lesCommande->setIdUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLesCommande(Commande $lesCommande): self
-    {
-        if ($this->lesCommandes->removeElement($lesCommande)) {
-            // set the owning side to null (unless already changed)
-            if ($lesCommande->getIdUtilisateur() === $this) {
-                $lesCommande->setIdUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commande $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes->add($commande);
-            $commande->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getUser() === $this) {
-                $commande->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAmountEuro(): ?string
     {
         return $this->amount_euro;
@@ -200,6 +143,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAmountFidelite(string $amount_fidelite): self
     {
         $this->amount_fidelite = $amount_fidelite;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getLesCommandes(): Collection
+    {
+        return $this->lesCommandes;
+    }
+
+    public function addLesCommande(Commande $lesCommande): self
+    {
+        if (!$this->lesCommandes->contains($lesCommande)) {
+            $this->lesCommandes->add($lesCommande);
+            $lesCommande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesCommande(Commande $lesCommande): self
+    {
+        if ($this->lesCommandes->removeElement($lesCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($lesCommande->getUser() === $this) {
+                $lesCommande->setUser(null);
+            }
+        }
 
         return $this;
     }

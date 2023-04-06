@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\FamilleArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,12 +67,11 @@ class ApiController extends AbstractController
 
 
     #[Route('api/getPanier', name: 'app_api_getpanier')]
-    public function GetPanier(Request $req) {
+    public function GetPanier(Request $req, FamilleArticleRepository $rep) {
         $session = $req->getSession();
         $panier = $session->get('panier');
         if (is_null($panier)) $panier = array();
         $data = array();
-        
         foreach ($panier as $item) {
             $data[] = [
                 'id' => $item->getId(),
@@ -83,7 +83,7 @@ class ApiController extends AbstractController
                 'description' => $item->getDescription(),
                 'lesCommandes' => $item->getLesCommandes(),
                 'lesMenus' => $item->getLesMenus(),
-                'famille' => $item->getFamille(),
+                'id_famille' => $item->getFamille()->getId(),
             ];
         }
 
