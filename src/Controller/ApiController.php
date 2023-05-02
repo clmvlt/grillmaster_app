@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\MenuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,7 +111,7 @@ class ApiController extends AbstractController
         return new JsonResponse($data);
     }
     #[Route('api/getMenu', name: 'app_api_getmenu')]
-    public function getMenu(ArticleRepository $rep): JsonResponse
+    public function getMenu(MenuRepository $rep): JsonResponse
     {
         $lesmenu = $rep->findAll();
         $data = [];

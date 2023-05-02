@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Article;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class MenuType extends AbstractType
 {
@@ -21,7 +22,14 @@ class MenuType extends AbstractType
                 'choice_label' => 'libelle',
                 'multiple' => true,
             ))
+           
+
         ;
+         if (!$builder->getData()->getImage()) {
+                $builder->add('image', FileType::class);
+            } else {
+    
+            }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
