@@ -4,11 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
-<<<<<<< HEAD
 use App\Repository\FamilleArticleRepository;
-=======
 use App\Repository\MenuRepository;
->>>>>>> d78a7b2957d785237bec166e367fd76fabc135ab
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
