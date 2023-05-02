@@ -41,6 +41,14 @@ class MenuController extends AbstractController
 
         if(($form->isSubmitted() && $form->isValid()))
         {
+            $file_tmp = $_FILES['menu']['tmp_name']['image'];
+
+            $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+            $img = $form['image']->getData();
+            $data = file_get_contents($img);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $menu->setImage($base64);
             $manager->persist($menu);
             $manager->flush();
             return $this->redirect($request->getUri());        }

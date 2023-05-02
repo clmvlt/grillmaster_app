@@ -10,7 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230406072205 extends AbstractMigration
+<<<<<<<< HEAD:migrations/Version20230406064534.php
+final class Version20230406064534 extends AbstractMigration
+========
+final class Version20230404085720 extends AbstractMigration
+>>>>>>>> d78a7b2957d785237bec166e367fd76fabc135ab:migrations/Version20230404085720.php
 {
     public function getDescription(): string
     {
@@ -21,7 +25,7 @@ final class Version20230406072205 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT NOT NULL, famille_id INT DEFAULT NULL, libelle VARCHAR(255) NOT NULL, image MEDIUMTEXT NOT NULL, prix_euro DOUBLE PRECISION NOT NULL, prix_fidelite INT NOT NULL, fidelite TINYINT(1) NOT NULL, description VARCHAR(1000) NOT NULL, reference VARCHAR(255) NOT NULL, INDEX IDX_23A0E6697A77B84 (famille_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE commande (id INT AUTO_INCREMENT NOT NULL, id_typecommande_id INT DEFAULT NULL, user_id INT NOT NULL, montant_euro DOUBLE PRECISION NOT NULL, montant_fidelite INT NOT NULL, gain_fidelite INT NOT NULL, date_commande DATETIME NOT NULL, INDEX IDX_6EEAA67D15FCCB81 (id_typecommande_id), INDEX IDX_6EEAA67DA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE commande (id INT AUTO_INCREMENT NOT NULL, id_typecommande_id INT DEFAULT NULL, user_id INT DEFAULT NULL, montant_euro DOUBLE PRECISION NOT NULL, montant_fidelite INT NOT NULL, gain_fidelite INT NOT NULL, date_commande DATETIME NOT NULL, INDEX IDX_6EEAA67D15FCCB81 (id_typecommande_id), INDEX IDX_6EEAA67DA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE commande_article (commande_id INT NOT NULL, article_id INT NOT NULL, INDEX IDX_F4817CC682EA2E54 (commande_id), INDEX IDX_F4817CC67294869C (article_id), PRIMARY KEY(commande_id, article_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE famille_article (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE menu (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, image MEDIUMTEXT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

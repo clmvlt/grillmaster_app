@@ -22,7 +22,14 @@
             <a class="nav-link" href="/avantages"><span :class="getActive('avantages')">Mes Avantages</span></a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="/menu"><span :class="getActive('menu')">Nos Menus</span></a>
+=======
+            <a class="nav-link" href="#">Mes Avantages</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/menu">Nos Menus</a>
+>>>>>>> d78a7b2957d785237bec166e367fd76fabc135ab
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
