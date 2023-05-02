@@ -20,17 +20,15 @@
                     <th scope="col">Type</th>
                     <th scope="col">Montant</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Nombre d'articles</th>
                     </tr>
                 </thead>
                 <tbody
-                    {% for cmd in app.user.lesCommandes %}
+                    {% for cmd in app.user.lesCommandes|reverse %}
                     <tr>
                         <td>{{cmd.montantEuro == 0 ? "FID" : "CB"}}00{{cmd.id}}</td>
                         <td>{{cmd.idTypeCommande.libelle}}</td>
                         <td>-{{cmd.montantEuro == 0 ? cmd.montantFidelite ~ " points" : cmd.montantEuro ~ "€"}}</td>
                         <td>Le {{cmd.dateCommande|date('Y-m-d')}} à {{cmd.dateCommande|date('H:i:s')}}</td>
-                        <td>{{cmd.lesArticles|length}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

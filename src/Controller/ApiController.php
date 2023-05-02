@@ -81,9 +81,6 @@ class ApiController extends AbstractController
                 'prix_fidelite' => $item->getPrixFidelite(),
                 'fidelite' => $item->isFidelite(),
                 'description' => $item->getDescription(),
-                'lesCommandes' => $item->getLesCommandes(),
-                'lesMenus' => $item->getLesMenus(),
-                'id_famille' => $item->getFamille()->getId(),
             ];
         }
 

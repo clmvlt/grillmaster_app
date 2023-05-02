@@ -6,7 +6,10 @@
   <div class="text-center mt-5">
   {{cmdOk ? "Merci pour votre commande !" : "Votre commande n'a pas pu être passée."}}
   <br/>
+  {{cmdOk ? "Vous avez gagné " ~ gainFid ~ " points de fidelité."}}
+  <br/>
   {{cmdOk == false and message != "" ? "Raison : " ~ message}}
+  </div>
   </div>
 
 {% endblock %}

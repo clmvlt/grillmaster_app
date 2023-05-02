@@ -40,6 +40,8 @@ class BoutiqueController extends AbstractController
 
         $totalFid = 0;
         $totalEur = 0;
+        $gainFid = 0;
+
         foreach ($panier as $item) {
             if ($fidelite) {
                 $totalFid += $item->getPrixFidelite();
@@ -64,7 +66,6 @@ class BoutiqueController extends AbstractController
             $cmdOk = false;
             $msg = "Vous n'avez aucun article dans votre panier.";
         }
-
         if ($cmdOk) {
             $commande = new Commande();
 
@@ -81,17 +82,12 @@ class BoutiqueController extends AbstractController
             $commande->setDateCommande(new \DateTime());
             
             
-            $gainFid = $commande->getMontantEuro() / 5;
+            $gainFid = $commande->getMontantEuro();
+            
             $commande->setGainFidelite($gainFid);
             $commande->setIdTypecommande($manager->getRepository(TypeCommande::class)->find(1));
             $user->setAmountFidelite($user->getAmountFidelite() + $gainFid);
 
-            
-            foreach ($panier as $item) {
-                $item->setFamille($manager->getRepository(FamilleArticle::class)->find($item->getFamille()));
-                $commande->addLesArticle($item);
-            }
-            
             $manager->persist($commande);
             $manager->flush();
 
@@ -100,7 +96,8 @@ class BoutiqueController extends AbstractController
         return $this->render('boutique/paiement.html.twig', [
             'controller_name' => 'BoutiqueController',
             'message' => $msg,
-            'cmdOk' => $cmdOk
+            'cmdOk' => $cmdOk,
+            "gainFid" => $gainFid
         ]);
     }
 
