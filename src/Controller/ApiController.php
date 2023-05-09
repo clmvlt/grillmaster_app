@@ -117,7 +117,6 @@ class ApiController extends AbstractController
                 'id' => $menu->getId(),
                 'libelle' => $menu->getLibelle(),
                 'image' => $menu->getImage(),
-           
             ];
         }
         return new JsonResponse($data);
